@@ -72,12 +72,102 @@ if($last_index - $first_index == 0) {
 
         $text = "";
         $datas1 = $pdf->getPages()[0]->getDataTm();
+
+$tableArrayData = [];
+$tableDataStartingIndex = -1;
+$tableDataStarted = false;
+
+
+
         foreach($datas1 as $data1) {
             $text .= $data1[1] ;
         }
         if(!empty($pdf->getPages()[1])) {
         $datas2 = $pdf->getPages()[1]->getDataTm();
-        foreach($datas2 as $data2) {
+        foreach($datas2 as $index=>$data2) {
+
+                if($data2[1] == "e") {
+                  if(
+                    $datas2[$index + 1][1] == "t"
+                    &&
+                    $datas2[$index + 2][1] == "i"
+                    &&
+                    $datas2[$index + 3][1] == "o"
+                    &&
+                    $datas2[$index + 4][1] == "n"
+                    &&
+                    $datas2[$index + 5][1] == "D"
+                    &&
+                    $datas2[$index + 6][1] == "a"
+                    &&
+                    $datas2[$index + 7][1] == "t"
+                    &&
+                    $datas2[$index + 8][1] == "e"
+                    ) {
+
+                        $tableDataStartingIndex = ($index + 9);
+                        echo "found";
+
+                  }
+                }
+                if($tableDataStartingIndex == $index) {
+                    $tableDataStarted = true;
+                }
+
+                if($data2[1] == "P") {
+                    if(
+                      $datas2[$index + 1][1] == "r"
+                      &&
+                      $datas2[$index + 2][1] == "o"
+                      &&
+                      $datas2[$index + 3][1] == "c"
+                      &&
+                      $datas2[$index + 4][1] == "u"
+                      &&
+                      $datas2[$index + 5][1] == "r"
+                      &&
+                      $datas2[$index + 6][1] == "i"
+                      &&
+                      $datas2[$index + 7][1] == "n"
+                      &&
+                      $datas2[$index + 8][1] == "g"
+                      &&
+                      $datas2[$index + 9][1] == " "
+                      &&
+                      $datas2[$index + 10][1] == "E"
+                      &&
+                      $datas2[$index + 11][1] == "n"
+                      &&
+                      $datas2[$index + 12][1] == "t"
+                      &&
+                      $datas2[$index + 13][1] == "i"
+                      &&
+                      $datas2[$index + 14][1] == "t"
+                      &&
+                      $datas2[$index + 15][1] == "y"
+                      &&
+                      $datas2[$index + 16][1] == " "
+                      &&
+                      $datas2[$index + 17][1] == "D"
+                      &&
+                      $datas2[$index + 18][1] == "e"
+
+                      ) {
+                          $tableDataStarted = false;
+                          echo "foundend";
+
+                    }
+                  }
+
+if($tableDataStarted) {
+    array_push($tableArrayData,$data2);
+}
+
+
+
+
+             echo $data2[1] . "  " . json_encode($data2[0]) . "<br>";
+
             $text .= $data2[1] ;
         }
         }
@@ -86,6 +176,16 @@ if($last_index - $first_index == 0) {
             foreach($datas3 as $data3) {
                 $text .= $data3[1] ;
             }
+        }
+
+        foreach($tableArrayData as $index => $data4) {
+            if(!empty($tableArrayData[$index + 1])) {
+                if(($tableArrayData[$index + 1][0][4] - $data4[0][4]) > 40) {
+                    echo $data4[1] . "  " . json_encode($data4[0][4]) . "<br>";
+                }
+            }
+
+
         }
 
 
@@ -154,18 +254,45 @@ $text =  str_replace(array('/'), '',$text);
      $informationForTendererConsultantIndex =   $this->stringGetIndex($text,"Information for TendererConsultant :");
      $eligibilityOfTendererIndex =   $this->stringGetIndex($text,"Eligibility of Tenderer :");
     //  stop
-     $briefDescriptionOfGoodsIndex =   $this->stringGetIndex($text,"Brief Description of Goods");
+     $briefDescriptionOfGoodsIndex =   $this->stringGetIndex($text,"Brief Description of Goodsand Related Service :");
       //  stop
 
      $evaluationTypeIndex =   $this->stringGetIndex($text,"Evaluation Type :");
+
       $documentAvailableIndex =   $this->stringGetIndex($text,"Document Available :");
       $documentFeesIndex =   $this->stringGetIndex($text,"Document Fees :");
+      $tenderProposalDocumentPriceIndex =   $this->stringGetIndex($text,"TenderProposal DocumentPrice (In BDT) :");
+
+
       $modeOfPaymentIndex =   $this->stringGetIndex($text,"Mode of Payment :");
-      $TenderProposalValidUptoIndex =   $this->stringGetIndex($text,"TenderProposal Valid Up to");
+      $TenderProposalSecurityValidUptoIndex =   $this->stringGetIndex($text,"TenderProposal SecurityValid Up to :");
+
+      $TenderProposalValidUptoIndex =   $this->stringGetIndex($text,"TenderProposal Valid Up to:");
+      $lotNoIndex =   $this->stringGetIndex($text,"LotNo.");
+
+      $NameofOfficialInvitingTenderProposalIndex =   $this->stringGetIndex($text,"Name of OfficialInvitingTenderProposal:");
+      $DesignationofOfficialInvitingTenderProposalIndex =   $this->stringGetIndex($text,"Designation of Official Inviting TenderProposal :");
+
+      $AddressofOfficialInvitingTenderProposalIndex =   $this->stringGetIndex($text,"Address ofOfficial InvitingTenderProposal:");
+      $AddressIndex =   $this->stringGetIndex($text,"Address:");
+      $CityIndex =   $this->stringGetIndex($text,"City:");
+      $ThanaIndex =   $this->stringGetIndex($text,"Thana:");
+      $DistrictIndex =   $this->stringGetIndex($text,"District:");
+
+
+
+
       $CountryIndex =   $this->stringGetIndex($text,"Country:");
 
 
       $ContactDetailsOfOfficialInvitingTenderProposalIndex =   $this->stringGetIndex($text,"Contact details of Official Inviting TenderProposal :");
+
+      $PhoneNoIndex =   $this->stringGetIndex($text,"PhoneNo:");
+      $FaxNoIndex =   $this->stringGetIndex($text,"FaxNo:");
+
+      $TheprocuringentityreservesIndex =   $this->stringGetIndex($text,"The procuring entity reserves");
+
+
     //  $Index =   $this->stringGetIndex($text,"");
     //  $Index =   $this->stringGetIndex($text,"");
     //  $Index =   $this->stringGetIndex($text,"");
@@ -260,20 +387,43 @@ $text =  str_replace(array('/'), '',$text);
 
      $formData["eligibilityOfTenderer"] = $this->getSubStr($text,$eligibilityOfTendererIndex[1],$briefDescriptionOfGoodsIndex[0]);
 
+     $formData["briefDescriptionOfGoods"] = $this->getSubStr($text,$briefDescriptionOfGoodsIndex[1],$evaluationTypeIndex[0]);
+
+
+
 
      $formData["evaluationType"] = $this->getSubStr($text,$evaluationTypeIndex[1],$documentAvailableIndex[0]);
 
 
      $formData["documentAvailable"] = $this->getSubStr($text,$documentAvailableIndex[1],$documentFeesIndex[0]);
 
-     $formData["documentFees"] = $this->getSubStr($text,$documentFeesIndex[1],$modeOfPaymentIndex[0]);
+     $formData["documentFees"] = $this->getSubStr($text,$documentFeesIndex[1],$tenderProposalDocumentPriceIndex[0]);
+     $formData["tenderProposalDocumentPrice"] = $this->getSubStr($text,$tenderProposalDocumentPriceIndex[1],$modeOfPaymentIndex[0]);
 
-     $formData["modeOfPayment"] = $this->getSubStr($text,$modeOfPaymentIndex[1],$TenderProposalValidUptoIndex[0]);
 
+     $formData["modeOfPayment"] = $this->getSubStr($text,$modeOfPaymentIndex[1],$TenderProposalSecurityValidUptoIndex[0]);
 
-     $formData["tenderProposalValidUpto"] = $this->getSubStr($text,$TenderProposalValidUptoIndex[1],$CountryIndex[0]);
+     $formData["tenderProposalSecurityValidUpto"] = $this->getSubStr($text,$TenderProposalSecurityValidUptoIndex[1],$TenderProposalValidUptoIndex[0]);
+
+     $formData["tenderProposalValidUpto"] = $this->getSubStr($text,$TenderProposalValidUptoIndex[1],$lotNoIndex[0]);
+
+     $formData["NameofOfficialInvitingTenderProposal"] = $this->getSubStr($text,$NameofOfficialInvitingTenderProposalIndex[1],$DesignationofOfficialInvitingTenderProposalIndex[0]);
+
+     $formData["DesignationofOfficialInvitingTenderProposal"] = $this->getSubStr($text,$DesignationofOfficialInvitingTenderProposalIndex[1],$AddressofOfficialInvitingTenderProposalIndex[0]);
+
+     $formData["Address"] = $this->getSubStr($text,$AddressIndex[1],$CityIndex[0]);
+
+     $formData["City"] = $this->getSubStr($text,$CityIndex[1],$ThanaIndex[0]);
+
+     $formData["Thana"] = $this->getSubStr($text,$ThanaIndex[1],$DistrictIndex[0]);
+
+     $formData["District"] = $this->getSubStr($text,$DistrictIndex[1],$CountryIndex[0]);
+
 
      $formData["country"] = $this->getSubStr($text,$CountryIndex[1],$ContactDetailsOfOfficialInvitingTenderProposalIndex[0]);
+
+     $formData["PhoneNo"] = $this->getSubStr($text,$PhoneNoIndex[1],$FaxNoIndex[0]);
+     $formData["FaxNo"] = $this->getSubStr($text,$FaxNoIndex[1],$TheprocuringentityreservesIndex[0]);
 
 
     //  return response()->json($text,200);

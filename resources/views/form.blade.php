@@ -313,12 +313,219 @@
             </div>
         </div>
 
+        <h3 class="text-success">View IFT /PQ / REOI / RFP Notice Details</h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="EligibilityofTenderer" class="form-label">Eligibility of Tenderer :</label>
+                    <input type="text" class="form-control" id="EligibilityofTenderer" name="EligibilityofTenderer"
+
+                    @if ($formData["eligibilityOfTenderer"] != "could not retrieve")
+                        value="{{$formData["eligibilityOfTenderer"]}}"
+                    @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="BriefDescriptionofGoodsandRelatedService" class="form-label" >Brief Description of Goodsand Related Service :</label>
+                    <input type="text" class="form-control" id="BriefDescriptionofGoodsandRelatedService" name="BriefDescriptionofGoodsandRelatedService"
+                    @if ($formData["briefDescriptionOfGoods"] != "could not retrieve")
+                    value="{{$formData["briefDescriptionOfGoods"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="EvaluationType" class="form-label" >Evaluation Type :</label>
+                    <input type="text" class="form-control" id="EvaluationType" name="EvaluationType"
+                    @if ($formData["evaluationType"] != "could not retrieve")
+                    value="{{$formData["evaluationType"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="DocumentAvailable" class="form-label" >Document Available :</label>
+                    <input type="text" class="form-control" id="DocumentAvailable" name="DocumentAvailable"
+                    @if ($formData["documentAvailable"] != "could not retrieve")
+                    value="{{$formData["documentAvailable"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="DocumentFees" class="form-label" >Document Fees :</label>
+                    <input type="text" class="form-control" id="DocumentFees" name="DocumentFees"
+                    @if ($formData["documentFees"] != "could not retrieve")
+                    value="{{$formData["documentFees"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="TenderProposalDocumentPrice" class="form-label" >Tender/Proposal DocumentPrice (In BDT) :</label>
+                    <input type="text" class="form-control" id="TenderProposalDocumentPrice" name="TenderProposalDocumentPrice"
+                    @if ($formData["tenderProposalDocumentPrice"] != "could not retrieve")
+                    value="{{$formData["tenderProposalDocumentPrice"]}}"
+
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="ModeofPayment" class="form-label" >Mode of Payment :</label>
+                    <input type="text" class="form-control" id="ModeofPayment" name="ModeofPayment"
+                    @if ($formData["modeOfPayment"] != "could not retrieve")
+                    value="{{$formData["modeOfPayment"]}}"
+
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="TenderProposalSecurityValidUpto" class="form-label" >Tender/Proposal Security Valid Up to :</label>
+                    <input type="text" class="form-control" id="TenderProposalSecurityValidUpto" name="TenderProposalSecurityValidUpto"
+                    @if ($formData["tenderProposalSecurityValidUpto"] != "could not retrieve")
+                    value="{{$formData["tenderProposalSecurityValidUpto"]}}"
+
+                @endif
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="TenderProposalValidUpto" class="form-label" >Tender/Proposal Valid Up to</label>
+                    <input type="text" class="form-control" id="TenderProposalValidUpto" name="TenderProposalValidUpto"
+                    @if ($formData["tenderProposalValidUpto"] != "could not retrieve")
+                    value="{{$formData["tenderProposalValidUpto"]}}"
+
+                @endif
+                    >
+                  </div>
+            </div>
+
+        </div>
+
+        <h3 class="text-success">Procuring Entity Details:</h3>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="NameofOfficialInvitingTenderProposal" class="form-label">Name of Official Inviting Tender/Proposal:</label>
+                    <input type="text" class="form-control" id="NameofOfficialInvitingTenderProposal" name="NameofOfficialInvitingTenderProposal"
+
+                    @if ($formData["NameofOfficialInvitingTenderProposal"] != "could not retrieve")
+                        value="{{$formData["NameofOfficialInvitingTenderProposal"]}}"
+                    @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="Address" class="form-label" >Address:</label>
+                    <input type="text" class="form-control" id="Address" name="Address"
+                    @if ($formData["Address"] != "could not retrieve")
+                    value="{{$formData["Address"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="City" class="form-label" >City
+                        :</label>
+                    <input type="text" class="form-control" id="City" name="City"
+                    @if ($formData["City"] != "could not retrieve")
+                    value="{{$formData["City"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="Thana" class="form-label" >Thana :</label>
+                    <input type="text" class="form-control" id="Thana" name="Thana"
+                    @if ($formData["Thana"] != "could not retrieve")
+                    value="{{$formData["Thana"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="District" class="form-label" >District :</label>
+                    <input type="text" class="form-control" id="District" name="District"
+                    @if ($formData["District"] != "could not retrieve")
+                    value="{{$formData["District"]}}"
+                @endif
+
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="Country" class="form-label" >Country :</label>
+                    <input type="text" class="form-control" id="Country" name="Country"
+                    @if ($formData["country"] != "could not retrieve")
+                    value="{{$formData["country"]}}"
+
+                @endif
+
+                    >
+                  </div>
+
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="DesignationofOfficialInvitingTenderProposal" class="form-label" >Designation of Official Inviting Tender/Proposal :</label>
+                    <input type="text" class="form-control" id="DesignationofOfficialInvitingTenderProposal" name="DesignationofOfficialInvitingTenderProposal"
+                    @if ($formData["DesignationofOfficialInvitingTenderProposal"] != "could not retrieve")
+                    value="{{$formData["DesignationofOfficialInvitingTenderProposal"]}}"
+
+                @endif
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="PhoneNo" class="form-label" >Phone No:</label>
+                    <input type="text" class="form-control" id="PhoneNo" name="PhoneNo"
+                    @if ($formData["PhoneNo"] != "could not retrieve")
+                    value="{{$formData["PhoneNo"]}}"
+
+                @endif
+                    >
+                  </div>
+                  <div class="mb-3">
+                    <label for="FaxNo" class="form-label" >Fax No:</label>
+                    <input type="text" class="form-control" id="FaxNo" name="FaxNo"
+                    @if ($formData["FaxNo"] != "could not retrieve")
+                    value="{{$formData["FaxNo"]}}"
+
+                @endif
+                    >
+                  </div>
 
 
 
 
+            </div>
+        </div>
 
 
+      <table class="table">
+        <thead>
+            <tr>
+                <th>Lot No.</th>
+                <th> Identification of Lot </th>
+                <th>Location</th>
+                <th>Tender/Proposal security (Amount in BDT)</th>
+                <th>Tentative Start Date</th>
+                <th>Tentative Completion Date</th>
+            </tr>
+
+        </thead>
+        <tbody>
+<tr>
+    <td>Lot No.</td>
+    <td> Identification of Lot </td>
+    <td>Location</td>
+    <td>Tender/Proposal security (Amount in BDT)</td>
+    <td>Tentative Start Date</td>
+    <td>Tentative Completion Date</td>
+</tr>
+        </tbody>
+
+      </table>
 
 
     </div>
