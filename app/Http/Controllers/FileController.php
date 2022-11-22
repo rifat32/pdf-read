@@ -28,6 +28,7 @@ while (($lastPos = strpos($html, $needle, $lastPos))!== false) {
 if(!count($positions)) {
     return [-1 , -1];
 }
+
 return [$positions[0],$positions[0] + strlen($needle)];
 
 }
@@ -106,10 +107,10 @@ $text =  str_replace(array('/'), '',$text);
 
      $procurementNatureIndex =   $this->stringGetIndex($text,"Procurement Nature :");
      $procurementTypeIndex =   $this->stringGetIndex($text,"Procurement Type :");
-     $eventTypeIndex =   $this->stringGetIndex($text,"Event Type");
+     $eventTypeIndex =   $this->stringGetIndex($text,"Event Type :");
      $invitationForIndex =   $this->stringGetIndex($text,"Invitation for :");
      $invitationReferenceNoIndex =   $this->stringGetIndex($text,"Invitation Reference No. :");
-     $appIDIndex =   $this->stringGetIndex($text,"App ID");
+     $appIDIndex =   $this->stringGetIndex($text,"App ID :");
 
      $TenderProposalIDIndex =   $this->stringGetIndex($text,"TenderProposal ID :");
 
@@ -129,6 +130,24 @@ $text =  str_replace(array('/'), '',$text);
      $categoryIndex =   $this->stringGetIndex($text,"Category :");
 
      $scheduledTenderProposalPublicationDateAndTimeIndex =   $this->stringGetIndex($text,"ScheduledTenderProposalPublicationDate and Time :");
+     $TenderProposalDocumentlastsellingdownloadingDateandTimeIndex =   $this->stringGetIndex($text,"TenderProposal Documentlast selling downloading Date andTime :");
+     $PreTenderProposalmeetingStartDateandTimeIndex =   $this->stringGetIndex($text,"Pre - TenderProposalmeeting StartDate and Time :");
+
+     $PreTenderProposalmeetingEndDateandTimeIndex =   $this->stringGetIndex($text,"Pre - TenderProposalmeeting EndDate and Time :");
+
+     $TenderProposalClosingDateandTimeIndex =   $this->stringGetIndex($text,"TenderProposal ClosingDate and Time :");
+
+     $TenderProposalOpeningDateandTimeIndex =   $this->stringGetIndex($text,"TenderProposal OpeningDate and Time :");
+
+     $LastDateandTimeforTenderProposalSecuritySubmissionIndex =   $this->stringGetIndex($text,"Last Date and Time forTenderProposal SecuritySubmission :");
+
+
+
+
+// echo $PreTenderProposalmeetingEndDateandTimeIndex[0];
+
+
+
 
      $LastDateAndTimeForTenderProposalSecuritySubmissionIndex =   $this->stringGetIndex($text,"Last Date and Time forTenderProposal SecuritySubmission :");
 
@@ -177,13 +196,17 @@ $text =  str_replace(array('/'), '',$text);
 
      $formData["eventType"] = $this->getSubStr($text,$eventTypeIndex[1],$invitationForIndex[0]);
 
+     $formData["invitationFor"] = $this->getSubStr($text,$invitationForIndex[1],$invitationReferenceNoIndex[0]);
+
      $formData["invitationReferenceNo"] = $this->getSubStr($text,$invitationReferenceNoIndex[1],$appIDIndex[0]);
+
 
      $formData["appID"] = $this->getSubStr($text,$appIDIndex[1],$TenderProposalIDIndex[0]);
 
 
-
+// echo $appIDIndex[1] . " " . $TenderProposalIDIndex[0] . " " . $TenderProposalIDIndex[1] . " " . $keyInformationAndFundingInformationIndex[0];
      $formData["TenderProposalID"] = $this->getSubStr($text,$TenderProposalIDIndex[1],$keyInformationAndFundingInformationIndex[0]);
+
 
 
      $formData["keyInformationAndFundingInformation"] = $this->getSubStr($text,$keyInformationAndFundingInformationIndex[1],$procurementMethodIndex[0]);
@@ -208,6 +231,28 @@ $text =  str_replace(array('/'), '',$text);
 
      $formData["category"] = $this->getSubStr($text,$categoryIndex[1],$scheduledTenderProposalPublicationDateAndTimeIndex[0]);
 
+     $formData["scheduledTenderProposalPublicationDateAndTime"] = $this->getSubStr($text,$scheduledTenderProposalPublicationDateAndTimeIndex[1],$TenderProposalDocumentlastsellingdownloadingDateandTimeIndex[0]);
+
+     $formData["TenderProposalDocumentlastsellingdownloadingDateandTime"] = $this->getSubStr($text,$TenderProposalDocumentlastsellingdownloadingDateandTimeIndex[1],$PreTenderProposalmeetingStartDateandTimeIndex[0]);
+
+
+     $formData["PreTenderProposalmeetingStartDateandTime"] = $this->getSubStr($text,$PreTenderProposalmeetingStartDateandTimeIndex[1],$PreTenderProposalmeetingEndDateandTimeIndex[0]);
+
+
+     $formData["PreTenderProposalmeetingEndDateandTime"] = $this->getSubStr($text,$PreTenderProposalmeetingEndDateandTimeIndex[1],$TenderProposalClosingDateandTimeIndex[0]);
+
+
+
+     $formData["TenderProposalClosingDateandTime"] = $this->getSubStr($text,$TenderProposalClosingDateandTimeIndex[1],$TenderProposalOpeningDateandTimeIndex[0]);
+
+     $formData["TenderProposalOpeningDateandTime"] = $this->getSubStr($text,$TenderProposalOpeningDateandTimeIndex[1],$LastDateandTimeforTenderProposalSecuritySubmissionIndex[0]);
+
+     $formData["LastDateandTimeforTenderProposalSecuritySubmission"] = $this->getSubStr($text,$LastDateandTimeforTenderProposalSecuritySubmissionIndex[1],$informationForTendererConsultantIndex[0]);
+
+
+
+
+
      $formData["lastDateAndTimeForTenderProposalSecuritySubmission"] = $this->getSubStr($text,$LastDateAndTimeForTenderProposalSecuritySubmissionIndex[1],$informationForTendererConsultantIndex[0]);
 
 
@@ -231,10 +276,15 @@ $text =  str_replace(array('/'), '',$text);
      $formData["country"] = $this->getSubStr($text,$CountryIndex[1],$ContactDetailsOfOfficialInvitingTenderProposalIndex[0]);
 
 
-
-
+    //  return response()->json($text,200);
+     return view("form",compact("formData"));
     // echo $formData["ministry"];
-        //  return response()->json($text,200);
+    return response()->json($formData[""],200);
+          return response()->json($text,200);
+
+
+        return view("form",compact("formData"));
+
         return response()->json($formData,200);
 
     //    $upload_file = new File;
